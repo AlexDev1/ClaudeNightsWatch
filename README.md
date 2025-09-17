@@ -141,6 +141,35 @@ The rules file defines safety constraints and best practices. It's prepended to 
   - 5-30 minutes remaining: Check every 2 minutes
   - <5 minutes remaining: Check every 30 seconds
 
+### 📌 Preserving Context with `tasks.md`
+
+To make sure progress is not lost (especially when the daemon is restarted or after long breaks like sleeping), it’s recommended to **track and update your ongoing work inside a `tasks.md` file**. This file acts as the single source of truth for what has been done and what remains.
+
+#### Workflow
+1. **During Conversations / Work Sessions**  
+   - After completing any significant task, **always update `tasks.md`** with:  
+     - A short description of what was done.  
+     - Any pending follow-up actions.  
+     - Notes that will help resume work later.  
+
+   Example entry in `tasks.md`:
+   ```markdown
+   - [x] Implemented daemon restart logic
+   - [ ] Test the auto-renewal workflow with edge cases
+   - Notes: Pending tests involve certificate expiry < 1 day.
+
+2. **When Starting the Daemon (CCAutoRenew / NightsWatch)**
+
+   * On startup, the daemon (or you, if running manually) should **refer back to `tasks.md`** to regain context.
+   * Instead of starting from scratch, the system should **continue with `tasks.md`**, ensuring a smooth handover from the last session.
+
+
+#### Why This Helps
+
+* Prevents forgetting half-completed work.
+* Makes it easy to **resume exactly where you left off**, even after long breaks.
+* Provides a lightweight, version-controlled history of your progress.
+
 ## ⚠️ Safety Considerations
 
 **IMPORTANT**: This tool runs Claude with the `--dangerously-skip-permissions` flag, meaning it will execute tasks without asking for confirmation. 
@@ -153,6 +182,8 @@ The rules file defines safety constraints and best practices. It's prepended to 
 4. **Monitor logs regularly** to ensure proper execution
 5. **Keep backups** of important data
 6. **Run in isolated environments** when possible
+7. **Preserving Context** with tasks.md
+
 
 ### Recommended Restrictions:
 
