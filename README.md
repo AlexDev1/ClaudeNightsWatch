@@ -297,6 +297,9 @@ Please ensure:
 - Examples are provided
 - Tests pass
 
+## Star History
+<img width="3152" height="2274" alt="star-history-2025918" src="https://github.com/user-attachments/assets/a4aa79e0-0758-4823-90d9-79237f890598" />
+
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## 📄 License
