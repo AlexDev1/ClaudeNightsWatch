@@ -298,9 +298,11 @@ Please ensure:
 - Tests pass
 
 ## Star History
-<img width="3152" height="2274" alt="star-history-2025918" src="https://github.com/user-attachments/assets/a4aa79e0-0758-4823-90d9-79237f890598" />
+[![Star History Chart](https://api.star-history.com/svg?repos=aniketkarne/ClaudeNightsWatch&type=Date)](https://www.star-history.com/#aniketkarne/ClaudeNightsWatch&Date)
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+
+
+## See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## 📄 License
 
