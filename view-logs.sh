@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# Claude Nights Watch Log Viewer
+# Просмотрщик Логов Claude Nights Watch
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 TASK_DIR="${CLAUDE_NIGHTS_WATCH_DIR:-$(pwd)}"
 LOG_DIR="$TASK_DIR/logs"
 
-# Colors
+# Цвета
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
@@ -14,9 +14,9 @@ RED='\033[0;31m'
 NC='\033[0m'
 
 show_menu() {
-    echo -e "${BLUE}=== Claude Nights Watch Logs ===${NC}"
+    echo -e "${BLUE}=== Логи Claude Nights Watch ===${NC}"
     echo ""
-    echo "Available log files:"
+    echo "Доступные файлы логов:"
     echo ""
     
     if [ -d "$LOG_DIR" ]; then
@@ -26,23 +26,23 @@ show_menu() {
                 local basename=$(basename "$log")
                 local size=$(du -h "$log" | cut -f1)
                 local lines=$(wc -l < "$log")
-                echo "  $i) $basename (${size}, ${lines} lines)"
+                echo "  $i) $basename (${size}, ${lines} строк)"
                 ((i++))
             fi
         done
     else
-        echo "  No logs found in $LOG_DIR"
+        echo "  Логи не найдены в $LOG_DIR"
         exit 1
     fi
     
     echo ""
-    echo "Options:"
-    echo "  f) Follow latest log (tail -f)"
-    echo "  a) Show all logs concatenated"
-    echo "  p) Show only prompts sent to Claude"
-    echo "  r) Show only Claude responses"
-    echo "  e) Show only errors"
-    echo "  q) Quit"
+    echo "Опции:"
+    echo "  f) Отслеживать последний лог (tail -f)"
+    echo "  a) Показать все логи объединённые"
+    echo "  p) Показать только промпты, отправленные Claude"
+    echo "  r) Показать только ответы Claude"
+    echo "  e) Показать только ошибки"
+    echo "  q) Выход"
     echo ""
 }
 
@@ -72,26 +72,26 @@ view_log() {
     esac
 }
 
-# Main loop
+# Основной цикл
 while true; do
     clear
     show_menu
     
-    read -p "Select option: " choice
+    read -p "Выберите опцию: " choice
     
     case "$choice" in
         [0-9]*)
-            # Numeric selection - view specific log
+            # Числовой выбор - посмотреть конкретный лог
             log_files=("$LOG_DIR"/*.log)
             selected_log="${log_files[$((choice-1))]}"
             if [ -f "$selected_log" ]; then
                 echo ""
-                echo "1) View full log"
-                echo "2) View last 50 lines"
-                echo "3) View only prompts"
-                echo "4) View only responses"
-                echo "5) View only errors"
-                read -p "Select view mode: " view_mode
+                echo "1) Посмотреть полный лог"
+                echo "2) Посмотреть последние 50 строк"
+                echo "3) Посмотреть только промпты"
+                echo "4) Посмотреть только ответы"
+                echo "5) Посмотреть только ошибки"
+                read -p "Выберите режим просмотра: " view_mode
                 
                 case "$view_mode" in
                     1) view_log "$selected_log" "full" ;;
@@ -103,35 +103,35 @@ while true; do
             fi
             ;;
         f|F)
-            # Follow latest log
+            # Отслеживаем последний лог
             latest_log=$(ls -t "$LOG_DIR"/*.log 2>/dev/null | head -1)
             if [ -f "$latest_log" ]; then
-                echo "Following $(basename "$latest_log")... (Ctrl+C to stop)"
+                echo "Отслеживание $(basename "$latest_log")... (Ctrl+C для остановки)"
                 view_log "$latest_log" "follow"
             fi
             ;;
         a|A)
-            # Show all logs
+            # Показываем все логи
             cat "$LOG_DIR"/*.log | less
             ;;
         p|P)
-            # Show all prompts
+            # Показываем все промпты
             cat "$LOG_DIR"/*.log | awk '/=== PROMPT SENT TO CLAUDE ===/,/=== END OF PROMPT ===/' | less
             ;;
         r|R)
-            # Show all responses
+            # Показываем все ответы
             cat "$LOG_DIR"/*.log | awk '/=== CLAUDE RESPONSE START ===/,/=== CLAUDE RESPONSE END ===/' | less
             ;;
         e|E)
-            # Show all errors
+            # Показываем все ошибки
             grep -h -E "(ERROR|FAILED|Failed)" "$LOG_DIR"/*.log | less
             ;;
         q|Q)
-            echo "Goodbye!"
+            echo "До свидания!"
             exit 0
             ;;
     esac
     
     echo ""
-    read -p "Press Enter to continue..."
+    read -p "Нажмите Enter для продолжения..."
 done

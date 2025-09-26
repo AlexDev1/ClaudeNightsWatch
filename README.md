@@ -4,144 +4,144 @@
 [![Shell Script](https://img.shields.io/badge/Language-Shell-green.svg)](https://www.gnu.org/software/bash/)
 [![GitHub stars](https://img.shields.io/github/stars/aniketkarne/ClaudeNightsWatch.svg?style=social&label=Star)](https://github.com/aniketkarne/ClaudeNightsWatch)
 
-Autonomous task execution system for Claude CLI that monitors your usage windows and executes predefined tasks automatically. Built on top of the claude-auto-renew concept but instead of simple renewals, it executes complex tasks from a task.md file.
+Система автономного выполнения задач для Claude CLI, которая мониторит ваши окна использования и автоматически выполняет предопределённые задачи. Построена на основе концепции claude-auto-renew, но вместо простых обновлений выполняет сложные задачи из файла task.md.
 
-**⚠️ Warning**: This tool uses `--dangerously-skip-permissions` for autonomous execution. Use with caution!
+**⚠️ Предупреждение**: Этот инструмент использует `--dangerously-skip-permissions` для автономного выполнения. Используйте осторожно!
 
-## 🎯 Overview
+## 🎯 Обзор
 
-Claude Nights Watch extends the auto-renewal concept to create a fully autonomous task execution system. When your Claude usage window is about to expire, instead of just saying "hi", it reads your `task.md` file and executes the defined tasks autonomously.
+Claude Nights Watch расширяет концепцию автоматического обновления для создания полностью автономной системы выполнения задач. Когда окно использования Claude подходит к концу, вместо простого "привет", система читает файл `task.md` и автономно выполняет определённые задачи.
 
-### Key Features
+### Ключевые возможности
 
-- 🤖 **Autonomous Execution**: Runs tasks without manual intervention
-- 📋 **Task-Based Workflow**: Define tasks in a simple markdown file
-- 🛡️ **Safety Rules**: Configure safety constraints in `rules.md`
-- ⏰ **Smart Timing**: Uses ccusage for accurate timing or falls back to time-based checking
-- 📅 **Scheduled Start**: Can be configured to start at a specific time
-- 📊 **Comprehensive Logging**: Track all activities and executions
-- 🔄 **Based on Proven Code**: Built on the reliable claude-auto-renew daemon
+- 🤖 **Автономное Выполнение**: Запускает задачи без ручного вмешательства
+- 📋 **Рабочий Процесс на Основе Задач**: Определяйте задачи в простом markdown файле
+- 🛡️ **Правила Безопасности**: Настройте ограничения безопасности в `rules.md`
+- ⏰ **Умное Время**: Использует ccusage для точного хронометража или откат к проверке по времени
+- 📅 **Запланированный Запуск**: Может быть настроен для запуска в определённое время
+- 📊 **Комплексное Логирование**: Отслеживание всех действий и выполнений
+- 🔄 **На Основе Проверенного Кода**: Построен на надёжном демоне claude-auto-renew
 
-## 🚀 Quick Start
+## 🚀 Быстрый Старт
 
-### Prerequisites
+### Предварительные условия
 
-1. [Claude CLI](https://docs.anthropic.com/en/docs/claude-code/quickstart) installed and configured
-2. (Optional) [ccusage](https://www.npmjs.com/package/ccusage) for accurate timing:
+1. [Claude CLI](https://docs.anthropic.com/en/docs/claude-code/quickstart) установлен и настроен
+2. (Опционально) [ccusage](https://www.npmjs.com/package/ccusage) для точного хронометража:
    ```bash
    npm install -g ccusage
    ```
 
-### Installation
+### Установка
 
-1. Clone this repository:
+1. Клонируйте этот репозиторий:
    ```bash
    git clone https://github.com/aniketkarne/ClaudeNightsWatch.git
    cd ClaudeNightsWatch
    ```
 
-2. Make scripts executable:
+2. Сделайте скрипты исполняемыми:
    ```bash
    chmod +x *.sh
    ```
 
-3. Run the interactive setup:
+3. Запустите интерактивную настройку:
    ```bash
    ./setup-nights-watch.sh
    ```
 
-### Basic Usage
+### Базовое использование
 
-1. **Create your task file** (`task.md`):
+1. **Создайте файл задач** (`task.md`):
    ```markdown
-   # Daily Development Tasks
-   
-   1. Run linting on all source files
-   2. Update dependencies to latest versions
-   3. Run the test suite
-   4. Generate coverage report
-   5. Create a summary of changes
+   # Ежедневные Задачи Разработки
+
+   1. Запустить линтинг всех исходных файлов
+   2. Обновить зависимости до последних версий
+   3. Запустить набор тестов
+   4. Сгенерировать отчёт о покрытии
+   5. Создать сводку изменений
    ```
 
-2. **Create safety rules** (`rules.md`):
+2. **Создайте правила безопасности** (`rules.md`):
    ```markdown
-   # Safety Rules
-   
-   - Never delete files without backing up
-   - Only work within the project directory
-   - Always create feature branches for changes
-   - Never commit sensitive information
+   # Правила Безопасности
+
+   - Никогда не удаляйте файлы без резервных копий
+   - Работайте только в пределах директории проекта
+   - Всегда создавайте функциональные ветки для изменений
+   - Никогда не коммитьте конфиденциальную информацию
    ```
 
-3. **Start the daemon**:
+3. **Запустите демон**:
    ```bash
    ./claude-nights-watch-manager.sh start
    ```
 
-## 📝 Configuration
+## 📝 Конфигурация
 
-### Task File (task.md)
+### Файл Задач (task.md)
 
-The task file contains the instructions that Claude will execute. It should be clear, specific, and well-structured. See `examples/task.example.md` for a comprehensive example.
+Файл задач содержит инструкции, которые Claude будет выполнять. Он должен быть ясным, конкретным и хорошо структурированным. Смотрите `examples/task.example.md` для подробного примера.
 
-### Rules File (rules.md)
+### Файл Правил (rules.md)
 
-The rules file defines safety constraints and best practices. It's prepended to every task execution to ensure safe autonomous operation. See `examples/rules.example.md` for recommended rules.
+Файл правил определяет ограничения безопасности и лучшие практики. Он добавляется к каждому выполнению задачи для обеспечения безопасной автономной работы. Смотрите `examples/rules.example.md` для рекомендованных правил.
 
-### Environment Variables
+### Переменные Окружения
 
-- `CLAUDE_NIGHTS_WATCH_DIR`: Set the directory containing task.md and rules.md (default: current directory)
+- `CLAUDE_NIGHTS_WATCH_DIR`: Установите директорию содержащую task.md и rules.md (по умолчанию: текущая директория)
 
-## 🎮 Commands
+## 🎮 Команды
 
-### Manager Commands
+### Команды Менеджера
 
 ```bash
-# Start the daemon
+# Запустить демон
 ./claude-nights-watch-manager.sh start
 
-# Start with scheduled time
+# Запустить с запланированным временем
 ./claude-nights-watch-manager.sh start --at "09:00"
 ./claude-nights-watch-manager.sh start --at "2025-01-28 14:30"
 
-# Stop the daemon
+# Остановить демон
 ./claude-nights-watch-manager.sh stop
 
-# Check status
+# Проверить статус
 ./claude-nights-watch-manager.sh status
 
-# View logs
+# Просмотреть логи
 ./claude-nights-watch-manager.sh logs
-./claude-nights-watch-manager.sh logs -f  # Follow mode
+./claude-nights-watch-manager.sh logs -f  # Режим отслеживания
 
-# Use interactive log viewer
+# Использовать интерактивный просмотрщик логов
 ./view-logs.sh
 
-# View current task and rules
+# Просмотреть текущую задачу и правила
 ./claude-nights-watch-manager.sh task
 
-# Restart daemon
+# Перезапустить демон
 ./claude-nights-watch-manager.sh restart
 ```
 
-## 🔧 How It Works
+## 🔧 Как Это Работает
 
-1. **Monitoring**: The daemon continuously monitors your Claude usage windows
-2. **Timing**: When approaching the 5-hour limit (within 2 minutes), it prepares for execution
-3. **Task Preparation**: Reads both `rules.md` and `task.md`, combining them into a single prompt
-4. **Autonomous Execution**: Executes the task using `claude --dangerously-skip-permissions`
-5. **Logging**: All activities are logged to `logs/claude-nights-watch-daemon.log`
+1. **Мониторинг**: Демон непрерывно отслеживает ваши окна использования Claude
+2. **Хронометраж**: При приближении к 5-часовому лимиту (в пределах 2 минут), готовится к выполнению
+3. **Подготовка Задач**: Читает `rules.md` и `task.md`, объединяя их в один промпт
+4. **Автономное Выполнение**: Выполняет задачу используя `claude --dangerously-skip-permissions`
+5. **Логирование**: Все действия логируются в `logs/claude-nights-watch-daemon.log`
 
-### Timing Logic
+### Логика Хронометража
 
-- **With ccusage**: Gets accurate remaining time from the API
-- **Without ccusage**: Falls back to timestamp-based checking
-- **Adaptive intervals**:
-  - \>30 minutes remaining: Check every 10 minutes
-  - 5-30 minutes remaining: Check every 2 minutes
-  - <5 minutes remaining: Check every 30 seconds
+- **С ccusage**: Получает точное оставшееся время из API
+- **Без ccusage**: Откат к проверке на основе временных меток
+- **Адаптивные интервалы**:
+  - \>30 минут осталось: Проверка каждые 10 минут
+  - 5-30 минут осталось: Проверка каждые 2 минуты
+  - <5 минут осталось: Проверка каждые 30 секунд
 
-### 📌 Preserving Context with `tasks.md`
+### 📌 Сохранение Контекста с помощью `tasks.md`
 
 To make sure progress is not lost (especially when the daemon is restarted or after long breaks like sleeping), it’s recommended to **track and update your ongoing work inside a `tasks.md` file**. This file acts as the single source of truth for what has been done and what remains.
 
@@ -170,150 +170,150 @@ To make sure progress is not lost (especially when the daemon is restarted or af
 * Makes it easy to **resume exactly where you left off**, even after long breaks.
 * Provides a lightweight, version-controlled history of your progress.
 
-## ⚠️ Safety Considerations
+## ⚠️ Соображения Безопасности
 
-**IMPORTANT**: This tool runs Claude with the `--dangerously-skip-permissions` flag, meaning it will execute tasks without asking for confirmation. 
+**ВАЖНО**: Этот инструмент запускает Claude с флагом `--dangerously-skip-permissions`, что означает выполнение задач без запроса подтверждения.
 
-### Best Practices:
+### Лучшие Практики:
 
-1. **Always test tasks manually first** before setting up autonomous execution
-2. **Use comprehensive rules.md** to prevent destructive actions
-3. **Start with simple, safe tasks** and gradually increase complexity
-4. **Monitor logs regularly** to ensure proper execution
-5. **Keep backups** of important data
-6. **Run in isolated environments** when possible
-7. **Preserving Context** with tasks.md
+1. **Всегда сначала тестируйте задачи вручную** перед настройкой автономного выполнения
+2. **Используйте комплексный rules.md** для предотвращения разрушительных действий
+3. **Начинайте с простых, безопасных задач** и постепенно увеличивайте сложность
+4. **Регулярно отслеживайте логи** для обеспечения правильного выполнения
+5. **Ведите резервные копии** важных данных
+6. **Запускайте в изолированных средах** когда возможно
+7. **Сохраняйте Контекст** с помощью tasks.md
 
 
-### Recommended Restrictions:
+### Рекомендованные Ограничения:
 
-- Limit file system access to project directories
-- Prohibit deletion commands
-- Prevent system modifications
-- Restrict network access
-- Set resource limits
+- Ограничьте доступ к файловой системе директориями проекта
+- Запретите команды удаления
+- Предотвратите изменения системы
+- Ограничьте сетевой доступ
+- Установите лимиты ресурсов
 
-## 📁 File Structure
+## 📁 Структура Файлов
 
 ```
 claude-nights-watch/
-├── claude-nights-watch-daemon.sh      # Core daemon process
-├── claude-nights-watch-manager.sh     # Daemon management interface
-├── setup-nights-watch.sh              # Interactive setup script
-├── view-logs.sh                       # Interactive log viewer
-├── README.md                          # This file
-├── LICENSE                            # MIT License
-├── CONTRIBUTING.md                    # Contribution guidelines
-├── CHANGELOG.md                       # Version history
-├── SUMMARY.md                         # Project summary
-├── .gitignore                         # Git ignore file
-├── .github/                           # GitHub templates
+├── claude-nights-watch-daemon.sh      # Основной процесс демона
+├── claude-nights-watch-manager.sh     # Интерфейс управления демоном
+├── setup-nights-watch.sh              # Интерактивный скрипт настройки
+├── view-logs.sh                       # Интерактивный просмотрщик логов
+├── README.md                          # Этот файл
+├── LICENSE                            # MIT Лицензия
+├── CONTRIBUTING.md                    # Руководство по вкладу
+├── CHANGELOG.md                       # История версий
+├── SUMMARY.md                         # Сводка проекта
+├── .gitignore                         # Файл исключений Git
+├── .github/                           # Шаблоны GitHub
 │   ├── ISSUE_TEMPLATE/
 │   │   ├── bug_report.md
 │   │   └── feature_request.md
 │   └── pull_request_template.md
-├── logs/                              # All logs stored here (created on first run)
-├── examples/                          # Example files
-│   ├── task.example.md                # Example task file
-│   └── rules.example.md               # Example rules file
-└── test/                              # Test scripts and files
-    ├── README.md                      # Testing documentation
-    ├── test-immediate-execution.sh    # Direct task execution test
-    ├── test-simple.sh                 # Simple functionality test
-    ├── test-task-simple.md            # Simple test task
-    └── test-rules-simple.md           # Simple test rules
+├── logs/                              # Все логи хранятся здесь (создаётся при первом запуске)
+├── examples/                          # Примеры файлов
+│   ├── task.example.md                # Пример файла задач
+│   └── rules.example.md               # Пример файла правил
+└── test/                              # Тестовые скрипты и файлы
+    ├── README.md                      # Документация по тестированию
+    ├── test-immediate-execution.sh    # Тест прямого выполнения задач
+    ├── test-simple.sh                 # Тест простой функциональности
+    ├── test-task-simple.md            # Простая тестовая задача
+    └── test-rules-simple.md           # Простые тестовые правила
 ```
 
-## 📊 Logging
+## 📊 Логирование
 
-All logs are stored in the `logs/` directory within the project. Each log contains:
+Все логи хранятся в директории `logs/` внутри проекта. Каждый лог содержит:
 
-- **Timestamps**: Every action is timestamped
-- **Full Prompts**: Complete prompt sent to Claude (rules + task)
-- **Full Responses**: Everything Claude outputs
-- **Status Messages**: Success/failure indicators
+- **Временные Метки**: Каждое действие помечается временем
+- **Полные Промпты**: Полный промпт отправленный Claude (правила + задача)
+- **Полные Ответы**: Всё что выводит Claude
+- **Сообщения Статуса**: Индикаторы успеха/неудачи
 
-### Viewing Logs
+### Просмотр Логов
 
-Use the interactive log viewer:
+Используйте интерактивный просмотрщик логов:
 ```bash
 ./view-logs.sh
 ```
 
-Features:
-- Browse all log files
-- View full logs or last 50 lines
-- Filter to see only prompts sent to Claude
-- Filter to see only Claude's responses
-- Search for errors
-- Follow logs in real-time
+Возможности:
+- Просмотр всех файлов логов
+- Просмотр полных логов или последних 50 строк
+- Фильтрация для просмотра только промптов отправленных Claude
+- Фильтрация для просмотра только ответов Claude
+- Поиск ошибок
+- Отслеживание логов в реальном времени
 
-## 🧪 Testing
+## 🧪 Тестирование
 
-Test scripts are available in the `test/` directory:
+Тестовые скрипты доступны в директории `test/`:
 
 ```bash
 cd test
-./test-simple.sh  # Run a simple test
+./test-simple.sh  # Запустить простой тест
 ```
 
-See `test/README.md` for detailed testing instructions.
+Смотрите `test/README.md` для подробных инструкций по тестированию.
 
-## 🐛 Troubleshooting
+## 🐛 Устранение Неполадок
 
-### Daemon won't start
-- Check if Claude CLI is installed: `which claude`
-- Verify task.md exists in the working directory
-- Check logs: `./claude-nights-watch-manager.sh logs`
+### Демон не запускается
+- Проверьте установлен ли Claude CLI: `which claude`
+- Убедитесь что task.md существует в рабочей директории
+- Проверьте логи: `./claude-nights-watch-manager.sh logs`
 
-### Tasks not executing
-- Verify you have remaining Claude usage: `ccusage blocks`
-- Check if past scheduled start time
-- Ensure task.md is not empty
-- Review logs for errors
+### Задачи не выполняются
+- Убедитесь что у вас есть оставшееся использование Claude: `ccusage blocks`
+- Проверьте не прошло ли запланированное время запуска
+- Убедитесь что task.md не пуст
+- Просмотрите логи на наличие ошибок
 
-### Timing issues
-- Install ccusage for better accuracy: `npm install -g ccusage`
-- Check system time is correct
-- Verify `.claude-last-activity` timestamp
+### Проблемы с хронометражем
+- Установите ccusage для лучшей точности: `npm install -g ccusage`
+- Проверьте правильность системного времени
+- Проверьте временную метку `.claude-last-activity`
 
-## 🤝 Contributing
+## 🤝 Вклад в Проект
 
-Contributions are welcome! Please follow these steps:
+Вклады приветствуются! Пожалуйста следуйте этим шагам:
 
-1. **Fork the repository** on GitHub
-2. **Clone your fork** locally
-3. **Create a feature branch** (`git checkout -b feature/amazing-feature`)
-4. **Make your changes** following our guidelines
-5. **Test thoroughly** using the test suite
-6. **Commit your changes** (`git commit -m 'Add amazing feature'`)
-7. **Push to your fork** (`git push origin feature/amazing-feature`)
-8. **Create a Pull Request** on GitHub
+1. **Форкните репозиторий** на GitHub
+2. **Клонируйте ваш форк** локально
+3. **Создайте функциональную ветку** (`git checkout -b feature/amazing-feature`)
+4. **Внесите изменения** следуя нашим рекомендациям
+5. **Тщательно тестируйте** используя набор тестов
+6. **Закоммитьте ваши изменения** (`git commit -m 'Add amazing feature'`)
+7. **Загрузите в ваш форк** (`git push origin feature/amazing-feature`)
+8. **Создайте Pull Request** на GitHub
 
-Please ensure:
-- Code follows existing style
-- Safety is prioritized  
-- Documentation is updated
-- Examples are provided
-- Tests pass
+Пожалуйста убедитесь:
+- Код следует существующему стилю
+- Безопасность приоритизируется
+- Документация обновлена
+- Примеры предоставлены
+- Тесты проходят
 
-## Star History
+## История Звёзд
 [![Star History Chart](https://api.star-history.com/svg?repos=aniketkarne/ClaudeNightsWatch&type=Date)](https://www.star-history.com/#aniketkarne/ClaudeNightsWatch&Date)
 
 
 
-## See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+## Смотрите [CONTRIBUTING.md](CONTRIBUTING.md) для подробных рекомендаций.
 
-## 📄 License
+## 📄 Лицензия
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Этот проект лицензируется под лицензией MIT - смотрите файл [LICENSE](LICENSE) для подробностей.
 
-## 🙏 Acknowledgments
+## 🙏 Благодарности
 
-- **Created by**: [Aniket Karne](https://github.com/aniketkarne)
-- **Built on top of**: The excellent [CCAutoRenew](https://github.com/aniketkarne/CCAutoRenew) project
-- **Thanks to**: The Claude CLI team for the amazing tool
+- **Создано**: [Aniket Karne](https://github.com/aniketkarne)
+- **Построено на основе**: Отличного проекта [CCAutoRenew](https://github.com/aniketkarne/CCAutoRenew)
+- **Благодарность**: Команде Claude CLI за замечательный инструмент
 
 ---
 
-**Remember**: With great automation comes great responsibility. Always review your tasks and rules carefully before enabling autonomous execution! 🚨
+**Помните**: С великой автоматизацией приходит великая ответственность. Всегда внимательно проверяйте ваши задачи и правила перед включением автономного выполнения! 🚨

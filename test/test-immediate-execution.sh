@@ -1,55 +1,55 @@
 #!/bin/bash
 
-# Test script to execute task immediately without waiting for renewal window
+# Тестовый скрипт для немедленного выполнения задачи без ожидания окна обновления
 
 LOG_FILE="${CLAUDE_NIGHTS_WATCH_DIR:-$(pwd)}/logs/claude-nights-watch-test.log"
 TASK_FILE="${TASK_FILE:-task.md}"
 RULES_FILE="${RULES_FILE:-rules.md}"
 TASK_DIR="${CLAUDE_NIGHTS_WATCH_DIR:-$(pwd)}"
 
-# Ensure logs directory exists
+# Убеждаемся что директория логов существует
 mkdir -p "$(dirname "$LOG_FILE")" 2>/dev/null
 
-# Function to log messages
+# Функция для логирования сообщений
 log_message() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" | tee -a "$LOG_FILE"
 }
 
-# Function to prepare task with rules
+# Функция для подготовки задачи с правилами
 prepare_task_prompt() {
     local prompt=""
     
-    # Add rules if they exist
+    # Добавляем правила если они существуют
     if [ -f "$TASK_DIR/$RULES_FILE" ]; then
         prompt="IMPORTANT RULES TO FOLLOW:\n\n"
         prompt+=$(cat "$TASK_DIR/$RULES_FILE")
         prompt+="\n\n---END OF RULES---\n\n"
-        log_message "Applied rules from $RULES_FILE"
+        log_message "Применены правила из $RULES_FILE"
     fi
     
-    # Add task content
+    # Добавляем содержание задачи
     if [ -f "$TASK_DIR/$TASK_FILE" ]; then
         prompt+="TASK TO EXECUTE:\n\n"
         prompt+=$(cat "$TASK_DIR/$TASK_FILE")
         prompt+="\n\n---END OF TASK---\n\n"
         prompt+="Please read the above task, create a todo list from it, and then execute it step by step."
     else
-        log_message "ERROR: Task file not found at $TASK_DIR/$TASK_FILE"
+        log_message "ОШИБКА: Файл задач не найден по пути $TASK_DIR/$TASK_FILE"
         return 1
     fi
     
     echo -e "$prompt"
 }
 
-# Main execution
+# Основное выполнение
 main() {
-    log_message "=== Claude Nights Watch Test Execution Started ==="
-    log_message "Task directory: $TASK_DIR"
-    log_message "Log file: $LOG_FILE"
+    log_message "=== Начало Тестового Выполнения Claude Nights Watch ==="
+    log_message "Директория задач: $TASK_DIR"
+    log_message "Файл логов: $LOG_FILE"
     
     # Check if task file exists
     if [ ! -f "$TASK_DIR/$TASK_FILE" ]; then
-        log_message "ERROR: Task file not found at $TASK_DIR/$TASK_FILE"
+        log_message "ОШИБКА: Файл задач не найден по пути $TASK_DIR/$TASK_FILE"
         exit 1
     fi
     

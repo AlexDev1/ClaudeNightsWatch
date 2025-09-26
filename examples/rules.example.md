@@ -1,106 +1,106 @@
-# Safety Rules for Claude Nights Watch
+# Правила Безопасности для Claude Nights Watch
 
-## CRITICAL RULES - NEVER VIOLATE THESE:
+## КРИТИЧНЫЕ ПРАВИЛА - НИКОГДА НЕ НАРУШАЙТЕ:
 
-### 1. File System Safety
-- **NEVER** use `rm -rf` or force deletion commands
-- **NEVER** modify files outside the current project directory
-- **NEVER** access or modify system files (/etc, /usr, /System, etc.)
-- **ALWAYS** create backups before modifying important files
+### 1. Безопасность Файловой Системы
+- **НИКОГДА** не используйте `rm -rf` или принудительное удаление
+- **НИКОГДА** не изменяйте файлы вне текущей директории проекта
+- **НИКОГДА** не получайте доступ к системным файлам (/etc, /usr, /System и т.д.)
+- **ВСЕГДА** создавайте резервные копии перед изменением важных файлов
 
-### 2. Git Safety
-- **NEVER** force push to main/master branches
-- **NEVER** rewrite published git history
-- **NEVER** delete remote branches without explicit permission
-- **ALWAYS** create feature branches for changes
-- **ALWAYS** use descriptive commit messages
+### 2. Безопасность Git
+- **НИКОГДА** не делайте force push в main/master ветки
+- **НИКОГДА** не переписывайте опубликованную git историю
+- **НИКОГДА** не удаляйте удалённые ветки без явного разрешения
+- **ВСЕГДА** создавайте функциональные ветки для изменений
+- **ВСЕГДА** используйте описательные сообщения коммитов
 
-### 3. Security Rules
-- **NEVER** commit passwords, API keys, or secrets
-- **NEVER** expose sensitive information in logs
-- **NEVER** disable security features
-- **NEVER** run commands with sudo/admin privileges
-- **ALWAYS** use environment variables for sensitive data
+### 3. Правила Безопасности
+- **НИКОГДА** не коммитьте пароли, API ключи или секреты
+- **НИКОГДА** не раскрывайте конфиденциальную информацию в логах
+- **НИКОГДА** не отключайте функции безопасности
+- **НИКОГДА** не выполняйте команды с sudo/администраторскими правами
+- **ВСЕГДА** используйте переменные окружения для конфиденциальных данных
 
-### 4. Network Safety
-- **NEVER** perform port scanning or network attacks
-- **NEVER** access unauthorized external services
-- **NEVER** download executables from untrusted sources
-- **ALWAYS** verify HTTPS certificates
+### 4. Сетевая Безопасность
+- **НИКОГДА** не выполняйте сканирование портов или сетевые атаки
+- **НИКОГДА** не обращайтесь к неавторизованным внешним сервисам
+- **НИКОГДА** не скачивайте исполняемые файлы из ненадёжных источников
+- **ВСЕГДА** проверяйте HTTPS сертификаты
 
-### 5. Resource Management
-- **NEVER** create infinite loops or resource-intensive operations
-- **NEVER** consume excessive disk space (>1GB)
-- **NEVER** spawn more than 10 concurrent processes
-- **ALWAYS** clean up temporary files
+### 5. Управление Ресурсами
+- **НИКОГДА** не создавайте бесконечных циклов или ресурсоёмких операций
+- **НИКОГДА** не потребляйте чрезмерное дисковое пространство (>1GB)
+- **НИКОГДА** не запускайте больше 10 параллельных процессов
+- **ВСЕГДА** очищайте временные файлы
 
-## BEST PRACTICES:
+## ЛУЧШИЕ ПРАКТИКИ:
 
-### Development Workflow
-1. Always run tests before committing
-2. Use semantic versioning for releases
-3. Follow existing code style and conventions
-4. Document all significant changes
-5. Review changes before finalizing
+### Рабочий Процесс Разработки
+1. Всегда запускайте тесты перед коммитом
+2. Используйте семантическое версионирование для релизов
+3. Следуйте существующим стилям кода и конвенциям
+4. Документируйте все значительные изменения
+5. Проверяйте изменения перед завершением
 
-### Error Handling
-1. Catch and log all errors appropriately
-2. Never suppress error messages
-3. Fail gracefully with helpful error messages
-4. Create rollback plans for risky operations
+### Обработка Ошибок
+1. Отлавливайте и логируйте все ошибки правильно
+2. Никогда не скрывайте сообщения об ошибках
+3. Корректно завершайте работу с полезными сообщениями об ошибках
+4. Создавайте планы отката для рискованных операций
 
-### Communication
-1. Log all significant actions
-2. Create summary reports after task completion
-3. Highlight any issues or concerns
-4. Ask for clarification if tasks are ambiguous
+### Коммуникация
+1. Логируйте все значимые действия
+2. Создавайте сводные отчёты после завершения задач
+3. Обращайте внимание на любые проблемы или опасения
+4. Просите пояснения, если задачи неясны
 
-## ALLOWED ACTIONS:
+## РАЗРЕШЁННЫЕ ДЕЙСТВИЯ:
 
-### Code Operations
-- Read and analyze source code
-- Create new files in the project directory
-- Modify existing project files
-- Run linters and formatters
-- Execute test suites
-- Build and compile code
+### Операции с Кодом
+- Читать и анализировать исходный код
+- Создавать новые файлы в директории проекта
+- Изменять существующие файлы проекта
+- Запускать линтеры и форматтеры
+- Выполнять наборы тестов
+- Собирать и компилировать код
 
-### Git Operations
-- Create and switch branches
-- Stage and commit changes
-- View git history and diffs
-- Create pull requests
-- Tag releases
+### Git Операции
+- Создавать и переключаться между ветками
+- Индексировать и коммитить изменения
+- Просматривать git историю и различия
+- Создавать pull request'ы
+- Помечать релизы тегами
 
-### Documentation
-- Generate documentation
-- Update README files
-- Create changelog entries
-- Add code comments
-- Write tutorials or guides
+### Документация
+- Генерировать документацию
+- Обновлять README файлы
+- Создавать записи в списке изменений
+- Добавлять комментарии к коду
+- Писать руководства или гайды
 
-### Dependency Management
-- Install project dependencies
-- Update package versions (following semver)
-- Audit for security vulnerabilities
-- Generate dependency graphs
+### Управление Зависимостями
+- Устанавливать зависимости проекта
+- Обновлять версии пакетов (следуя semver)
+- Проводить аудит уязвимостей безопасности
+- Генерировать графы зависимостей
 
-## FORBIDDEN ACTIONS:
+## ЗАПРЕЩЁННЫЕ ДЕЙСТВИЯ:
 
-1. Accessing user's personal files
-2. Modifying IDE or editor configurations
-3. Changing system settings
-4. Installing global packages without permission
-5. Accessing credentials or secrets
-6. Making external API calls without explicit permission
-7. Modifying production configurations
-8. Deleting user data or backups
+1. Доступ к личным файлам пользователя
+2. Изменение конфигураций IDE или редактора
+3. Изменение системных настроек
+4. Установка глобальных пакетов без разрешения
+5. Доступ к учётным данным или секретам
+6. Выполнение внешних API вызовов без явного разрешения
+7. Изменение продакшен конфигураций
+8. Удаление пользовательских данных или резервных копий
 
-## EXECUTION LIMITS:
+## ЛИМИТЫ ВЫПОЛНЕНИЯ:
 
-- Maximum execution time: 1 hour per session
-- Maximum file size for creation: 10MB
-- Maximum number of files to modify: 100
-- Maximum commits per session: 20
+- Максимальное время выполнения: 1 час на сессию
+- Максимальный размер файла для создания: 10MB
+- Максимальное количество файлов для изменения: 100
+- Максимальное количество коммитов за сессию: 20
 
-Remember: When in doubt, choose the safer option or log the concern for human review.
+Помните: Когда сомневаетесь, выбирайте более безопасный вариант или запишите опасение для ручной проверки.

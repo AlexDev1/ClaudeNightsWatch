@@ -1,42 +1,42 @@
-# Example Task for Claude Nights Watch
+# Пример Задачи для Claude Nights Watch
 
-## Project: Automated Code Review and Improvement
+## Проект: Автоматизированный Код-Ревью и Улучшения
 
-### Objectives:
-1. Review all Python files in the src/ directory
-2. Identify and fix any linting issues
-3. Add missing docstrings to functions
-4. Create a summary report of changes
+### Цели:
+1. Проверить все Python файлы в директории src/
+2. Выявить и исправить проблемы линтинга
+3. Добавить недостающие docstring к функциям
+4. Создать итоговый отчёт изменений
 
-### Specific Tasks:
+### Конкретные Задачи:
 
-#### 1. Code Quality Check
-- Run pylint on all Python files
-- Fix any critical issues found
-- Ensure PEP 8 compliance
+#### 1. Проверка Качества Кода
+- Запустить pylint на всех Python файлах
+- Исправить все критические проблемы
+- Обеспечить соответствие PEP 8
 
-#### 2. Documentation
-- Add docstrings to all public functions
-- Update README.md with any new features
-- Generate API documentation
+#### 2. Документация
+- Добавить docstring ко всем публичным функциям
+- Обновить README.md с новыми возможностями
+- Сгенерировать API документацию
 
-#### 3. Testing
-- Run existing test suite
-- Add tests for any uncovered functions
-- Ensure all tests pass
+#### 3. Тестирование
+- Запустить существующий набор тестов
+- Добавить тесты для непокрытых функций
+- Убедиться что все тесты проходят
 
-#### 4. Final Report
-- Create a CHANGES.md file
-- List all modifications made
-- Include before/after metrics
+#### 4. Финальный Отчёт
+- Создать файл CHANGES.md
+- Перечислить все внесённые изменения
+- Включить метрики "до/после"
 
-### Constraints:
-- Do not modify any files outside the project directory
-- Create a new branch called 'automated-improvements'
-- Commit changes with descriptive messages
+### Ограничения:
+- Не изменять файлы вне директории проекта
+- Создать новую ветку с названием 'automated-improvements'
+- Делать коммиты с описательными сообщениями
 
-### Success Criteria:
-- All tests pass
-- No critical linting issues
-- Documentation coverage > 80%
-- Clean git history with atomic commits
+### Критерии Успеха:
+- Все тесты проходят
+- Нет критических проблем линтинга
+- Покрытие документацией > 80%
+- Чистая git история с атомарными коммитами

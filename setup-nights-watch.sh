@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Claude Nights Watch Setup Script
-# Interactive setup for autonomous task execution
+# Скрипт Настройки Claude Nights Watch
+# Интерактивная настройка для автономного выполнения задач
 
-# Colors
+# Цвета
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -16,7 +16,7 @@ RULES_FILE="rules.md"
 
 print_header() {
     echo -e "${BLUE}================================${NC}"
-    echo -e "${BLUE}Claude Nights Watch Setup${NC}"
+    echo -e "${BLUE}Настройка Claude Nights Watch${NC}"
     echo -e "${BLUE}================================${NC}"
     echo ""
 }
@@ -35,55 +35,55 @@ print_warning() {
 
 check_claude() {
     if command -v claude &> /dev/null; then
-        print_success "Claude CLI found"
+        print_success "Claude CLI найден"
         return 0
     else
-        print_error "Claude CLI not found"
-        echo "Please install Claude CLI first: https://docs.anthropic.com/en/docs/claude-code/quickstart"
+        print_error "Claude CLI не найден"
+        echo "Пожалуйста, сначала установите Claude CLI: https://docs.anthropic.com/en/docs/claude-code/quickstart"
         return 1
     fi
 }
 
 check_ccusage() {
     if command -v ccusage &> /dev/null || command -v bunx &> /dev/null || command -v npx &> /dev/null; then
-        print_success "ccusage available (for accurate timing)"
+        print_success "ccusage доступен (для точного хронометража)"
         return 0
     else
-        print_warning "ccusage not found (will use time-based checking)"
-        echo "To install ccusage: npm install -g ccusage"
+        print_warning "ccusage не найден (будем использовать проверку по времени)"
+        echo "Для установки ccusage: npm install -g ccusage"
         return 0  # Not a fatal error
     fi
 }
 
 create_task_file() {
     if [ -f "$TASK_FILE" ]; then
-        print_warning "task.md already exists"
-        read -p "Do you want to view/edit it? (y/n) " -n 1 -r
+        print_warning "task.md уже существует"
+        read -p "Хотите посмотреть/отредактировать его? (y/n) " -n 1 -r
         echo
         if [[ $REPLY =~ ^[Yy]$ ]]; then
             ${EDITOR:-nano} "$TASK_FILE"
         fi
     else
         echo ""
-        echo "Creating task.md file..."
-        echo "Enter your task (press Ctrl+D when done):"
+        echo "Создание файла task.md..."
+        echo "Введите вашу задачу (нажмите Ctrl+D когда завершите):"
         echo ""
         cat > "$TASK_FILE"
-        print_success "Created task.md"
+        print_success "Создан task.md"
     fi
 }
 
 create_rules_file() {
     if [ -f "$RULES_FILE" ]; then
-        print_warning "rules.md already exists"
-        read -p "Do you want to view/edit it? (y/n) " -n 1 -r
+        print_warning "rules.md уже существует"
+        read -p "Хотите посмотреть/отредактировать его? (y/n) " -n 1 -r
         echo
         if [[ $REPLY =~ ^[Yy]$ ]]; then
             ${EDITOR:-nano} "$RULES_FILE"
         fi
     else
         echo ""
-        read -p "Do you want to create safety rules? (recommended) (y/n) " -n 1 -r
+        read -p "Хотите создать правила безопасности? (рекомендуется) (y/n) " -n 1 -r
         echo
         if [[ $REPLY =~ ^[Yy]$ ]]; then
             cat > "$RULES_FILE" << 'EOF'
@@ -134,9 +134,9 @@ create_rules_file() {
 - Fix bugs
 - Add new features as specified
 EOF
-            print_success "Created rules.md with default safety rules"
+            print_success "Создан rules.md с правилами безопасности по умолчанию"
             echo ""
-            read -p "Do you want to edit the rules? (y/n) " -n 1 -r
+            read -p "Хотите отредактировать правила? (y/n) " -n 1 -r
             echo
             if [[ $REPLY =~ ^[Yy]$ ]]; then
                 ${EDITOR:-nano} "$RULES_FILE"
@@ -147,19 +147,19 @@ EOF
 
 setup_daemon() {
     echo ""
-    echo "=== Daemon Configuration ==="
+    echo "=== Конфигурация Демона ==="
     echo ""
     
-    read -p "Do you want to start the daemon after setup? (y/n) " -n 1 -r
+    read -p "Хотите запустить демон после настройки? (y/n) " -n 1 -r
     echo
     START_NOW=$REPLY
     
     if [[ $START_NOW =~ ^[Yy]$ ]]; then
-        read -p "Do you want to schedule a start time? (y/n) " -n 1 -r
+        read -p "Хотите назначить время запуска? (y/n) " -n 1 -r
         echo
         
         if [[ $REPLY =~ ^[Yy]$ ]]; then
-            echo "Enter start time (HH:MM for today, or YYYY-MM-DD HH:MM):"
+            echo "Введите время запуска (HH:MM для сегодня, или YYYY-MM-DD HH:MM):"
             read START_TIME
             START_ARGS="--at $START_TIME"
         else
@@ -171,57 +171,57 @@ setup_daemon() {
 main() {
     print_header
     
-    # Check prerequisites
-    echo "Checking prerequisites..."
+    # Проверяем предварительные условия
+    echo "Проверка предварительных условий..."
     check_claude || exit 1
     check_ccusage
     echo ""
     
-    # Create/edit task file
-    echo "=== Task Configuration ==="
+    # Создаём/редактируем файл задач
+    echo "=== Конфигурация Задач ==="
     create_task_file
     echo ""
     
-    # Create/edit rules file
-    echo "=== Safety Rules Configuration ==="
+    # Создаём/редактируем файл правил
+    echo "=== Конфигурация Правил Безопасности ==="
     create_rules_file
     echo ""
     
-    # Setup daemon
+    # Настраиваем демон
     setup_daemon
     
-    # Summary
+    # Сводка
     echo ""
-    echo "=== Setup Complete ==="
-    print_success "Task file: $(pwd)/$TASK_FILE"
+    echo "=== Настройка Завершена ==="
+    print_success "Файл задач: $(pwd)/$TASK_FILE"
     if [ -f "$RULES_FILE" ]; then
-        print_success "Rules file: $(pwd)/$RULES_FILE"
+        print_success "Файл правил: $(pwd)/$RULES_FILE"
     fi
-    print_success "Manager: $MANAGER_SCRIPT"
+    print_success "Менеджер: $MANAGER_SCRIPT"
     echo ""
     
-    # Show available commands
-    echo "Available commands:"
-    echo "  ./claude-nights-watch-manager.sh start    - Start the daemon"
-    echo "  ./claude-nights-watch-manager.sh stop     - Stop the daemon"
-    echo "  ./claude-nights-watch-manager.sh status   - Check daemon status"
-    echo "  ./claude-nights-watch-manager.sh logs     - View logs"
-    echo "  ./claude-nights-watch-manager.sh task     - View current task"
+    # Показываем доступные команды
+    echo "Доступные команды:"
+    echo "  ./claude-nights-watch-manager.sh start    - Запустить демон"
+    echo "  ./claude-nights-watch-manager.sh stop     - Остановить демон"
+    echo "  ./claude-nights-watch-manager.sh status   - Проверить статус демона"
+    echo "  ./claude-nights-watch-manager.sh logs     - Посмотреть логи"
+    echo "  ./claude-nights-watch-manager.sh task     - Посмотреть текущую задачу"
     echo ""
     
-    # Start daemon if requested
+    # Запускаем демон если запрошено
     if [[ $START_NOW =~ ^[Yy]$ ]]; then
-        echo "Starting daemon..."
+        echo "Запуск демона..."
         "$MANAGER_SCRIPT" start $START_ARGS
     else
-        echo "To start the daemon later, run:"
+        echo "Чтобы запустить демон позже, выполните:"
         echo "  ./claude-nights-watch-manager.sh start"
     fi
     
     echo ""
-    print_warning "Remember: The daemon will execute tasks autonomously!"
-    print_warning "Always review your task.md and rules.md files carefully."
+    print_warning "Помните: Демон будет выполнять задачи автономно!"
+    print_warning "Всегда внимательно проверяйте ваши файлы task.md и rules.md."
 }
 
-# Run main function
+# Запускаем основную функцию
 main
